@@ -1,0 +1,28 @@
+/* add margin to the left of the first div */
+.mr-auto {
+    margin-left: 20px;
+}
+/* add margin to the right of the last div */
+.ml-auto {
+    margin-right: 20px;
+}
+/* Increase the button inside nav bar*/
+.my-nav .btn {
+    font-size: 20px;
+}
+
+#body-container {
+    padding-top: 20px;
+}
+#visual-box{
+    margin-top: 20px;
+}
+
+#visual-box .row .visual{
+    border: 1px solid grey;
+}
+
+/* Leaflet map setting*/
+#map {
+    height: 300px;
+}
