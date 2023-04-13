@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Boostrap CDN Link -->
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"/>
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous"/>
+    <!-- CSS Styles Sheet Link-->
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+    <!-- Leaflet CSS and JS Links -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- <style type="text/css">
+      body{
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style> -->
+    <title>Baltimore Crime Map</title>
+  </head>
+  <body>
+    <!-- Creating a nav bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-nav">
+      <div class="mr-auto ml-3">
+          <button class="btn btn-outline-light border-0">Add Visualization</button></h3>
+      </div>
+      <div class="mx-auto">
+          <h1 class="text-light">Project 47</h1>
+      </div>
+      <div class="ml-auto mr-3">
+          <button class="btn btn-outline-light border-0">Visual</button>
+          <button class="btn btn-outline-light border-0">Restore</button>
+      </div>
+    </nav>
+
+    <!-- Main content of the website -->
+    <div class="container-fluid text-center" id="body-container">
+      <div class="row">
+        <div class="col-10">
+          <div class="" id="visualization">
+            <!-- A container for leaflet map -->
+            <div class="" id="map"></div>
+            <div class="container" id="visual-box">
+              <div class="row text-center">
+                <div class="col-md-4"><div class="visual">Visual 1</div></div>
+                <div class="col-md-4"><div class="visual">Visual 2</div></div>
+                <div class="col-md-4"><div class="visual">Visual 3</div></div>
+                <div class="col-md-4"><div class="visual">Visual 4</div></div>
+                <div class="col-md-4"><div class="visual">Visual 5</div></div>
+                <div class="col-md-4"><div class="visual">Visual 6</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="btn-group-vertical" id="settings">
+            <button class="btn">Global Filter settings</button>
+            <button class="btn">TBD</button>
+            <button class="btn">TBD</button>
+            <button class="btn">TBD</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div id="map"></div> -->
+
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>    
+    <script src="{% static 'map.js' %}"></script>
+    <script>
+        var map = createMap();
+        addPoint(map);
+        document.getElementByID("destination").innerHTML=map;
+    </script>
+    <!--
+    <button onclick="createMap()">Click me</button>
+    <button onclick="addPoint()">Click me</button>
+    -->
+  </body>
+</html>
