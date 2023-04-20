@@ -19,7 +19,7 @@ function createMap()
     // reset map to default location
     L.easyButton('fa-home',function(btn,map){
         map.setView([39.299236, -76.609383], 12);
-      }).addTo(map);
+    }).addTo(map);
 
     return map;
 }
