@@ -7,21 +7,8 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Baltimore Crime Map{% endblock %}
+{% block nav-title %}<h1 class="text-light">Project47</h1>{% endblock %}
 {% block page_content %}
-  <!-- Creating a nav bar-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-nav">
-    <div class="mr-auto ml-3">
-        <button class="btn btn-outline-light border-0">Add Visualization</button></h3>
-    </div>
-    <div class="mx-auto">
-        <h1 class="text-light">Project 47</h1>
-    </div>
-    <div class="ml-auto mr-3">
-        <button class="btn btn-outline-light border-0">Home</button>
-        <button class="btn btn-outline-light border-0">Restore</button>
-    </div>
-  </nav>
-
   <!-- Main content of the website -->
   <div class="container-fluid text-center" id="body-container">
     <div class="row">
@@ -29,6 +16,7 @@
         <div class="" id="visualization">
           <!-- A container for leaflet map -->
           <div class="" id="map"></div>
+          <!-- A container for all the visualization displlay-->
           <div class="container" id="visual-box">
             <div class="row text-center">
               <div class="col-md-4"><div class="visual">Visual 1</div></div>
