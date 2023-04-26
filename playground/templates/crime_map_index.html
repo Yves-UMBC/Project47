@@ -54,14 +54,14 @@
     document.getElementByID("destination").innerHTML=map;
   </script>
 
-      <b> this </b>>
-    <table>
+  <b> this </b>>
+  <table>
     {% for crime in crimelist %}
-        <tr>
-            <td style="text-align:center"> {{ crime.idcrime }}</td>
-            <td style="text-align:center"> {{ crime.crimecode }}</td>
-        </tr>
+    <tr>
+      <td style="text-align:center"> CrimeId: {{ crime.idcrime }}</td>
+      <td style="text-align:center"> Crime Code: {{ crime.crimecode }}</td>
+    </tr>
     {% endfor %}
-    </table>
-  </body>
+  </table>
+</body>
 {% endblock %}

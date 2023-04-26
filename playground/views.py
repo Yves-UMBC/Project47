@@ -7,7 +7,10 @@ from .models import Crime
 # The home page of the crime map
 def crime_map_index(request):
     crimelist = Crime.objects.all()
-    return render(request, 'crime_map_index.html', {'crimelist' : crimelist})
+    context = {
+        "crimelist": crimelist,
+    }
+    return render(request, 'crime_map_index.html', context)
 
 # Rednering visualization page
 def visual_option(request):
