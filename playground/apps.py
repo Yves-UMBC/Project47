@@ -1,3 +1,5 @@
+# Contains setting for the application configuration
+
 from django.apps import AppConfig
 
 
