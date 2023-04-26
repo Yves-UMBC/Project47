@@ -2,10 +2,15 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Crime
 
 # The home page of the crime map
 def crime_map_index(request):
-    return render(request, 'crime_map_index.html')
+    crimelist = Crime.objects.all()
+    context = {
+        "crimelist": crimelist,
+    }
+    return render(request, 'crime_map_index.html', context)
 
 # Rednering visualization page
 def visual_option(request):
