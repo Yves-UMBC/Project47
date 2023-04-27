@@ -50,10 +50,14 @@
   <script src="{% static 'map.js' %}"></script>
   <script>
     var map = createMap();
-    addPoint(map);
-    document.getElementByID("destination").innerHTML=map;
   </script>
-
+  {% for crime in crimelist %}
+  <script>
+    addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
+    "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neightborhood}}");
+</script>
+{% endfor %}
+<!--
   <b> this </b>>
   <table>
     {% for crime in crimelist %}
@@ -65,3 +69,4 @@
   </table>
 </body>
 {% endblock %}
+-->
