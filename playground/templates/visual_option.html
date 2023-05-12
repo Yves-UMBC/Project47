@@ -1,10 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Visualization Options{% endblock %}
 {% block nav-title %}<h1 class="text-light">Adding Visualization</h1>{% endblock %}
+
 {% block page_content %}
     <h1 class="display-1">Visualization Page</h1>
-    <label for="type">Chart Type:</label>
 
+    <label for="type">Chart Type:</label>
     <select name="type" id="type">
         <option value="bar">Bar</option>
         <option value="line">Line</option>
@@ -12,60 +14,10 @@
         <option value="doughnut">Doughnut</option>
     </select>
     <hr>
-    <canvas id="myChart"></canvas>
+
+    <div><canvas id="myChart"></canvas></div>
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-    const type = document.getElementById('type');
-
-    type.addEventListener('click', function() {
-        changetype(this.value);
-    }
-    );
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            },{
-                label: 'Second set',
-                backgroundColor: ['pink', 'grey', 'purple', 'red'],
-                borderColor: ['orange', 'cyan', 'lightblue', 'bloodorange'],
-                data: [15, 10, 7, 5],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                y: {
-                beginAtZero: true
-                }
-            }
-        }
-    });
-
-    function changetype(updatetype) {
-        chart.config.type = updatetype;
-        chart.update();
-    };
-
-    function changebar() {
-        const updatetype = 'bar';
-        chart.config.type = updatetype;
-        chart.update();
-    };
-
-    
-    </script>
+    <script src="{% static 'chart_script.js' %}"></script>
 {% endblock %}
 
