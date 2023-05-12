@@ -1,4 +1,4 @@
-function createMap()
+function createMap(points)
 {
     const map = L.map('map', {
         center: [39.299236, -76.609383],
@@ -23,15 +23,15 @@ function createMap()
 
     // scale
     L.control.scale({position: 'bottomright'}).addTo(map);
-
+    L.heatLayer(points, {radius: 50, blur: 25}).addTo(map);
     return map;
 }
 
 // add datapoint to map
 // to do: change marker icon, import info from db
-function addPoint(map, latitude, longitude, crimecode, description, weapon, datetime, neighborhood)
+function addPoint(map, latitude, longitude, crimecode, description, weapon, datetime, neighborhood, location)
 {
     var msg = "Crime Code: " + crimecode + "<br>Description: " + description + "<br>Weapon: " + weapon + 
-    "<br>Date-time: " + datetime + "<br>Neighborhood: " + neighborhood;
+    "<br>Date-time: " + datetime + "<br>Neighborhood: " + neighborhood + "<br>Location: " + location;
     L.marker([latitude, longitude]).bindPopup(L.popup().setContent(msg)).addTo(map);
 }

@@ -32,7 +32,11 @@
       <div class="col">
         <div class="btn-group-vertical" id="settings">
           <button class="btn">Global Filter settings</button>
-          <button class="btn">TBD</button>
+          <select id="neighborhood">
+            <option value="1">N1</option>
+            <option value="1">N1</option>
+            <option value="1">N1</option>
+          </select>
           <button class="btn">TBD</button>
           <button class="btn">TBD</button>
         </div>
@@ -41,23 +45,36 @@
   </div>
   
   <!-- Leaflet Script for java Scripts-->
+  <!--<script type="module" src="{% static 'Leaflet-heat/dist/leaflet-heat.js' %}"></script>-->
   <script 
     src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" 
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" 
     crossorigin="">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>    
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>   
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+
   <script src="{% static 'map.js' %}"></script>
+  <script>const points = [];</script>
+  {% for crime in crimelist %}
   <script>
-    var map = createMap();
+    points.push(["{{crime.latitude}}", "{{crime.longitude}}"])
+</script>
+{% endfor %}
+  <script>
+    console.log(points.length)
+    var map = createMap(points);
   </script>
+<!--
   {% for crime in crimelist %}
   <script>
     addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
-    "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neightborhood}}");
+    "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
 </script>
 {% endfor %}
-<!--
+
+
   <b> this </b>>
   <table>
     {% for crime in crimelist %}
