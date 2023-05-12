@@ -2,7 +2,7 @@
 
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Crime
+from .models import Crime, Neighborhood
 
 # The home page of the crime map
 def crime_map_index(request):
@@ -14,4 +14,10 @@ def crime_map_index(request):
 
 # Rednering visualization page
 def visual_option(request):
-    return render(request, 'visual_option.html')
+    crimelist = Crime.objects.all()
+    neighborhoodlist = Neighborhood.objects.all()
+    context = {
+        "crimelist": crimelist,
+        "neighborhoodlist": neighborhoodlist,
+    }
+    return render(request, 'visual_option.html', context)
