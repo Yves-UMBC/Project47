@@ -43,14 +43,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col">
-        <div class="btn-group-vertical" id="settings">
-          <button class="btn">Global Filter settings</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
-        </div>
-      </div> -->
     </div>
   </div>
   
@@ -66,9 +58,10 @@
     var map = createMap();
   </script>
   {% for crime in crimelist %}
-  <script>
-    addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
-    "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
-</script>
-{% endfor %}
+    <script>
+      addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
+      "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
+    </script>
+  {% endfor %}
+  
 {% endblock %}

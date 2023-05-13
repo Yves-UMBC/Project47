@@ -6,18 +6,37 @@
 {% block page_content %}
     <h1 class="display-1">Visualization Page</h1>
 
-    <label for="type">Chart Type:</label>
+    <!-- <label for="type">Chart Type:</label>
     <select name="type" id="type">
         <option value="bar">Bar</option>
         <option value="line">Line</option>
         <option value="pie">Pie</option>
         <option value="doughnut">Doughnut</option>
-    </select>
+    </select> -->
+    <div>
+        <select class="form-select" name="type" id="type">
+            <option selected>Choose a Chart Type</option>
+            <option value="bar">Bar</option>
+            <option value="line">Line</option>
+            <option value="pie">Pie</option>
+            <option value="doughnut">Doughnut</option>
+        </select>
+    </div>
+    <div>
+        <select class="form-select" name="dataOne" id="dataOne">
+            <option selected>Choose Crime Data</option>
+            <option value="income">Income</option>
+            <option value="weapon">Weapon</option>
+            <option value="neighborhood">neighborhood</option>
+        </select>
+    </div>
     <hr>
 
     <div><canvas id="myChart"></canvas></div>
     
+    <!-- Adding Script for the Chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'chart_script.js' %}"></script>
+    
 {% endblock %}
 
