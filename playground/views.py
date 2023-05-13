@@ -22,3 +22,10 @@ def visual_option(request):
     }
     return render(request, 'visual_option.html', context)
 
+# sending Json request over to the chart_script.js
+def get_crime_data(request):
+    weaponData = {
+        "weaponLabels": ["Katana", "Rifle", "Bow", "Arrow"],
+        "weaponCounts": [100, 45, 80, 55],
+    }
+    return JsonResponse(weaponData)
