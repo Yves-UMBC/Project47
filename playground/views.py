@@ -24,14 +24,16 @@ def visual_option(request):
 
 # sending Json request over to the chart_script.js
 def get_crime_data(request):
-    # Query set of dictionary
-    weapons = Crime.objects.all().values("weapon")
+    dataType = request.GET.get("param1")
+    print(f"({dataType}) and type({type(dataType)})")
+    
+    # weapons contain the query set for all weapons dictionary
+    weapons = Crime.objects.all().values(dataType)
     weaponList = {}
 
     # weapon is a dictionary
     for weapon in weapons:
-        print(weapon, weapon['weapon'])
-        weaponType = weapon['weapon']
+        weaponType = weapon[dataType]
         weaponList[weaponType] = weaponList.get(weaponType, 0) + 1
 
     weaponData = {

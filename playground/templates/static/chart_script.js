@@ -17,7 +17,7 @@ const chart = new Chart(ctx, {
 
 // Dynamically updating the chart type
 var type = document.getElementById('type');
-type.addEventListener('click', function() {changeType(this.value);})
+type.addEventListener('change', function() {changeType(this.value);})
 
 function changeType(updateType) {    
     chart.config.type = updateType;      
@@ -25,13 +25,13 @@ function changeType(updateType) {
 }
 
 var data1 = document.getElementById('dataOne');
-data1.addEventListener('click', function() {changeData(this.value);})
+data1.addEventListener('change', function() {changeData(this.value);})
 
 function changeData(updateData) {
     if (updateData == 'income') {
-        chart.data.labels = ["$10k", "$20k", "$34k", "$50k"];
+        chart.data.labels = ["$10k", "$20k", "$30k", "$40k"];
     }else if (updateData == 'weapon') {
-        fetch('/get_crime_data')
+        fetch('/get_crime_data?param1=' + updateData)
             .then(response => response.json())
             .then(weaponData => {
                 chart.data.labels = weaponData.weaponLabels;
@@ -39,9 +39,15 @@ function changeData(updateData) {
                 chart.update();
             })
             .catch(error => console.error(error));
-        // chart.data.labels = ["Guns", "Whip", "Sword", "Knife"];
     }else if (updateData == 'neighborhood') {
-        chart.data.labels = ["Ellicot City", "Miami", "Leola", "Catonsville"];
+        fetch('/get_crime_data?param1=' + updateData)
+            .then(response => response.json())
+            .then(weaponData => {
+                chart.data.labels = weaponData.weaponLabels;
+                chart.data.datasets[0].data = weaponData.weaponCounts;
+                chart.update();
+            })
+            .catch(error => console.error(error));
     }
     chart.update();
 }
