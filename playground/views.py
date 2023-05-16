@@ -24,8 +24,18 @@ def visual_option(request):
 
 # sending Json request over to the chart_script.js
 def get_crime_data(request):
+    # Query set of dictionary
+    weapons = Crime.objects.all().values("weapon")
+    weaponList = {}
+
+    # weapon is a dictionary
+    for weapon in weapons:
+        print(weapon, weapon['weapon'])
+        weaponType = weapon['weapon']
+        weaponList[weaponType] = weaponList.get(weaponType, 0) + 1
+
     weaponData = {
-        "weaponLabels": ["Katana", "Rifle", "Bow", "Arrow"],
-        "weaponCounts": [100, 45, 80, 55],
+        "weaponLabels": list(weaponList.keys()),
+        "weaponCounts": list(weaponList.values()),
     }
     return JsonResponse(weaponData)
