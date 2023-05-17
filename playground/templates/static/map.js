@@ -61,5 +61,7 @@ function addPoint(map, latitude, longitude, crimecode, description, weapon, date
 {
     var msg = "Crime Code: " + crimecode + "<br>Description: " + description + "<br>Weapon: " + weapon + 
     "<br>Date-time: " + datetime + "<br>Neighborhood: " + neighborhood + "<br>Location: " + location;
+
     return L.marker([latitude, longitude]).bindPopup(L.popup().setContent(msg));
+
 }
