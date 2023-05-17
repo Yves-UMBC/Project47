@@ -13,8 +13,20 @@ function createMap(points)
             Satellite: L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{subdomains:['mt0','mt1','mt2','mt3'], attribution: '&copy; <a href= "https://cloud.google.com/maps-platform/terms/">Google Maps</a> contributors'})
 
     };
-    L.control.layers(basemaps, null, {position: 'bottomleft'}).addTo(map);
-    basemaps.StreetView.addTo(map)
+
+    // neighborhood outlines
+    var myStyle = {
+        "color": '#330000',
+        weight: 2,
+        opacity: 0.5,
+        fillOpacity: 0.5
+      };
+    var geojsonLayer = new L.GeoJSON.AJAX("static/neighborhood.geojson", 
+    {style: myStyle,
+      onEachFeature: function (feature, layer) {layer.bindPopup(feature.properties.CSA2010);}
+    });
+    //geojsonLayer.addTo(map);
+
 
     // reset map to default location
     L.easyButton('fa-home',function(btn,map){
@@ -23,7 +35,15 @@ function createMap(points)
 
     // scale
     L.control.scale({position: 'bottomright'}).addTo(map);
-    L.heatLayer(points, {radius: 50, blur: 25}).addTo(map);
+
+    // heat map
+    var heatMap = L.heatLayer(points, {radius: 50, blur: 25});
+
+    // layers contol panel
+    L.control.layers(basemaps, {"Neighborhoods": geojsonLayer, "Heat Map": heatMap}, {position: 'bottomleft'}).addTo(map);
+    basemaps.StreetView.addTo(map)
+
+
     return map;
 }
 
