@@ -1,4 +1,4 @@
-<!-- CSS Styles Sheet Link MAYBE REMOVE-->
+<!-- CSS Styles Sheet Link -->
 <link rel="stylesheet" type="text/css" href="/static/styles.css">
 <!-- Leaflet CSS and JS Links -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
@@ -12,29 +12,35 @@
   <!-- Main content of the website -->
   <div class="container-fluid text-center" id="body-container">
     <div class="row">
-      <div class="col-10">
+      <div class="col-12">
         <div class="" id="visualization">
           <!-- A container for leaflet map -->
           <div class="" id="map"></div>
           <!-- A container for all the visualization displlay-->
           <div class="container" id="visual-box">
+
             <div class="row text-center">
-              <div class="col-md-4"><div class="visual">Visual 1</div></div>
-              <div class="col-md-4"><div class="visual">Visual 2</div></div>
-              <div class="col-md-4"><div class="visual">Visual 3</div></div>
-              <div class="col-md-4"><div class="visual">Visual 4</div></div>
-              <div class="col-md-4"><div class="visual">Visual 5</div></div>
-              <div class="col-md-4"><div class="visual">Visual 6</div></div>
+              <div class="col-md-4">
+                <div class="visual">Visual 1</div>
+              </div>
+              <div class="col-md-4">
+                <div class="visual">Visual 2</div>
+              </div>
+              <div class="col-md-4">
+                <div class="visual">Visual 3</div>
+              </div>
+              <div class="col-md-4">
+                <div class="visual">Visual 4</div>
+              </div>
+              <div class="col-md-4">
+                <div class="visual">Visual 5</div>
+              </div>
+              <div class="col-md-4">
+                <div class="visual">Visual 6</div>
+              </div>
             </div>
+
           </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="btn-group-vertical" id="settings">
-          <button class="btn">Global Filter settings</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
         </div>
       </div>
     </div>
@@ -52,21 +58,10 @@
     var map = createMap();
   </script>
   {% for crime in crimelist %}
-  <script>
-    addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
-    "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
-</script>
-{% endfor %}
-<!--
-  <b> this </b>>
-  <table>
-    {% for crime in crimelist %}
-    <tr>
-      <td style="text-align:center"> CrimeId: {{ crime.idcrime }}</td>
-      <td style="text-align:center"> Crime Code: {{ crime.crimecode }}</td>
-    </tr>
-    {% endfor %}
-  </table>
-</body>
+    <script>
+      addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
+      "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
+    </script>
+  {% endfor %}
+  
 {% endblock %}
--->

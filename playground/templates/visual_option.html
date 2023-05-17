@@ -1,71 +1,51 @@
-{% extends "base.html" %}
-{% block title %}Visualization Options{% endblock %}
-{% block nav-title %}<h1 class="text-light">Adding Visualization</h1>{% endblock %}
-{% block page_content %}
-    <h1 class="display-1">Visualization Page</h1>
-    <label for="type">Chart Type:</label>
+<link rel="stylesheet" type="text/css" href="/static/styles.css">
 
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Visualization Options{% endblock %}
+{% block nav-title %}<h1 class="text-light">Preview Chart Options</h1>{% endblock %}
+
+{% block page_content %}
+    <!-- <h1 class="display-1">Visualization Page</h1> -->
+
+    <!-- <label for="type">Chart Type:</label>
     <select name="type" id="type">
         <option value="bar">Bar</option>
         <option value="line">Line</option>
         <option value="pie">Pie</option>
         <option value="doughnut">Doughnut</option>
-    </select>
-    <hr>
-    <canvas id="myChart"></canvas>
-    
+    </select> -->
+    <div class="chart-options-preview">
+        <div class="chart-options-select">
+            <div class="chart-type">
+                <select class="form-select" name="type" id="type">
+                    <option selected>Choose a Chart Type</option>
+                    <option value="bar">Bar</option>
+                    <option value="line">Line</option>
+                    <option value="pie">Pie</option>
+                    <option value="doughnut">Doughnut</option>
+                </select>
+            </div>
+            <div class="chart-data-one">
+                <select class="form-select" name="dataOne" id="dataOne">
+                    <option selected>Choose Crime Data</option>
+                    <option value="avgincome">Average Income</option>
+                    <option value="weapon">Weapon</option>
+                    <option value="neighborhood">neighborhood</option>
+                </select>
+            </div>
+            <div class="add-chart-button">
+                <a href="{% url 'crime_map_index' %}" class="btn btn-primary">Add Chart</a>
+            </div>
+        </div>
+        <div class="chart-preview">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+    <!-- Adding Script for the Chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <script>
-    const type = document.getElementById('type');
-
-    type.addEventListener('click', function() {
-        changetype(this.value);
-    }
-    );
-
-    const ctx = document.getElementById('myChart').getContext('2d');
-
-    const chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                borderWidth: 1
-            },{
-                label: 'Second set',
-                backgroundColor: ['pink', 'grey', 'purple', 'red'],
-                borderColor: ['orange', 'cyan', 'lightblue', 'bloodorange'],
-                data: [15, 10, 7, 5],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
-            },
-            scales: {
-                y: {
-                beginAtZero: true
-                }
-            }
-        }
-    });
-
-    function changetype(updatetype) {
-        chart.config.type = updatetype;
-        chart.update();
-    };
-
-    function changebar() {
-        const updatetype = 'bar';
-        chart.config.type = updatetype;
-        chart.update();
-    };
-
+    <script src="{% static 'chart_script.js' %}"></script>
     
-    </script>
 {% endblock %}
 

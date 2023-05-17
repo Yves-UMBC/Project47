@@ -150,6 +150,4 @@ class Neighborhood(models.Model):
         managed = False
         db_table = 'neighborhood'
 
-class Charts(models.Model):
-    idchart = models.IntegerField(primary_key=True)
-    type = models.CharField(max_length=50)
+
