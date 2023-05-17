@@ -26,3 +26,31 @@
 #map {
     height: 300px;
 }
+
+
+/* The Style is for the visual_option.html */
+.chart-options-preview {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 0.6fr 1.4fr;
+    gap: 0px 10px;
+    grid-template-areas: 
+        "chart-options-select chart-preview chart-preview"
+        ". chart-preview chart-preview";
+}
+
+.chart-options-select {
+    display: grid;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr 1fr; 
+    gap: 0px 0px;
+    grid-template-areas: 
+        "chart-type"
+        "chart-data-one";
+    grid-area: chart-options-select;
+}
+
+.chart-type { grid-area: chart-type; }
+.chart-data-one { grid-area: chart-data-one; }
+.chart-preview { grid-area: chart-preview; }

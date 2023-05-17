@@ -28,23 +28,25 @@ var data1 = document.getElementById('dataOne');
 data1.addEventListener('change', function() {changeData(this.value);})
 
 function changeData(updateData) {
-    if (updateData == 'income') {
-        chart.data.labels = ["$10k", "$20k", "$30k", "$40k"];
+    if (updateData == 'avgincome') {
+        chart.data.labels = ["10k", "20k", "30k", "40k"];
+        chart.data.datasets[0].data = [10, 20, 30, 40];
     }else if (updateData == 'weapon') {
         fetch('/get_crime_data?param1=' + updateData)
             .then(response => response.json())
-            .then(weaponData => {
-                chart.data.labels = weaponData.weaponLabels;
-                chart.data.datasets[0].data = weaponData.weaponCounts;
+            .then(displayData => {
+                chart.data.labels = displayData.dataLabels;
+                chart.data.datasets[0].data = displayData.dataCounts;
                 chart.update();
             })
             .catch(error => console.error(error));
+
     }else if (updateData == 'neighborhood') {
         fetch('/get_crime_data?param1=' + updateData)
             .then(response => response.json())
-            .then(weaponData => {
-                chart.data.labels = weaponData.weaponLabels;
-                chart.data.datasets[0].data = weaponData.weaponCounts;
+            .then(displayData => {
+                chart.data.labels = displayData.dataLabels;
+                chart.data.datasets[0].data = displayData.dataCounts;
                 chart.update();
             })
             .catch(error => console.error(error));
