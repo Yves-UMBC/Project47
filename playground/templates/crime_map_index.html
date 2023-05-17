@@ -3,12 +3,15 @@
 <!-- Leaflet CSS and JS Links -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-
+<!-- Links for Chosen Jquery drop down menu-->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Baltimore Crime Map{% endblock %}
 {% block nav-title %}<h1 class="text-light">Project47</h1>{% endblock %}
 {% block page_content %}
+
   <!-- Main content of the website -->
   <div class="container-fluid text-center" id="body-container">
     <div class="row">
@@ -32,37 +35,136 @@
       <div class="col">
         <div class="btn-group-vertical" id="settings">
           <button class="btn">Global Filter settings</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
-          <button class="btn">TBD</button>
+      <body>
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
+      <form method="post">
+        {% csrf_token %}
+        <div class="btn-group-vertical" id="settings">
+          <label for="neighborhood">Neighborhood:</label>
+          <select data-placeholder="Neighborhood" multiple class="chozen-select" name="neighborhood" style="width:180px">
+            {% for neighborhood in neighborhoodlist %}
+              <option value="{{neighborhood.name}}">{{neighborhood.name}}</option>
+            {% endfor %} 
+          </select> 
+          <button type="button" class="chosen-toggle select">Select all</button>
+          <button type="button" class="chosen-toggle deselect">Deselect all</button>  <br>
         </div>
-      </div>
+        <div class="btn-group-vertical" id="settings">
+          <label for="weapon">Weapon:</label>
+          <select data-placeholder="Weapon" multiple class="chozen-select" name="weapon" style="width:180px">
+            {% for weapon in weaponlist %}
+              <option value="{{weapon.weapon}}">{{weapon.weapon}}</option>
+            {% endfor %} 
+          </select> 
+          <button type="button" class="chosen-toggle select">Select all</button>
+          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+        </div>
+        <div class="btn-group-vertical" id="settings">
+          <label for="description">Description:</label>
+          <select data-placeholder="Description" multiple class="chozen-select" name="description"style="width:180px">
+            {% for description in descriptionlist %}
+              <option value="{{description.description}}">{{description.description}}</option>
+            {% endfor %} 
+          </select> 
+          <button type="button" class="chosen-toggle select">Select all</button>
+          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+        </div>
+        <div class="btn-group-vertical" id="settings">
+          <label for="crimeCode">Crime Code:</label>
+          <select data-placeholder="Crime Code" multiple class="chozen-select" name="crimecode style="width:180px">
+            {% for crimecode in crimecodelist %}
+              <option value="{{crimecode.crimecode}}">{{crimecode.crimecode}}</option>
+            {% endfor %} 
+          </select> 
+          <button type="button" class="chosen-toggle select">Select all</button>
+          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+        </div>
+        <div class="btn-group-vertical" id="settings">
+          <label for="hfai">HFAI:</label>
+          <select data-placeholder="hfai" multiple class="chozen-select" name="hfai" style="width:180px">
+            <option value="<6"> < 6.0</option>
+            <option value="6-8"> 6.0 - 8.0</option>
+            <option value="8-10"> 8.0 - 10.0</option>
+            <option value="10-12"> 10 - 12</option>
+            <option value=">12"> > 12.0</option>
+          </select> 
+          <button type="button" class="chosen-toggle select">Select all</button>
+          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+        </div>
+        <label for="start">Start Date:</label>
+        <input type="date" id="start">
+        <label for="end">End Date:</label>
+        <input type="date" id="end">
+        <button type="submit" name="'submit">Update</button>
+      </form> 
+        
+        <script type="text/javascript">
+          $(function() {
+              $(".chozen-select").chosen();
+          });
+
+
+            $('.chosen-toggle').each(function(index) {
+                $(this).on('click', function(){
+                     $(this).parent().find('option').prop('selected', $(this).hasClass('select')).parent().trigger('chosen:updated');
+                });
+            });
+                   </script>
+</body>  
+
+        </div>
     </div>
   </div>
-  
+
   <!-- Leaflet Script for java Scripts-->
+  <!--<script type="module" src="{% static 'Leaflet-heat/dist/leaflet-heat.js' %}"></script>-->
   <script 
     src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" 
     integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" 
     crossorigin="">
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>    
+  <script src="{% static 'leaflet.ajax.min.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>   
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+
   <script src="{% static 'map.js' %}"></script>
   <script>
-    var map = createMap();
+    var points = [];
+    const pointsrecent = [];
   </script>
+  {% for crime in crimelist %}
+    <script>
+      points.push(["{{crime.latitude}}", "{{crime.longitude}}"])
+    </script>
+  {% endfor %}
+
+  {% for crime in recentcrimes %}
+  <script>
+    pointsrecent.push(["{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
+      "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}"])
+  </script>
+  {% endfor %}
+  <script>
+    var map = createMap(points, pointsrecent);
+  </script>
+
+<!--
   {% for crime in crimelist %}
   <script>
     addPoint(map, "{{crime.latitude}}", "{{crime.longitude}}", "{{crime.crimecode}}", "{{crime.description}}",
     "{{crime.weapon}}","{{crime.datetime}}", "{{crime.neighborhood}}", "{{crime.location}}");
 </script>
 {% endfor %}
+-->
 <!--
   <b> this </b>>
   <table>
     {% for crime in crimelist %}
     <tr>
-      <td style="text-align:center"> CrimeId: {{ crime.idcrime }}</td>
+      <td style="text-align:center"> CrimeId: {{ crime.weapon }}</td>
       <td style="text-align:center"> Crime Code: {{ crime.crimecode }}</td>
     </tr>
     {% endfor %}
