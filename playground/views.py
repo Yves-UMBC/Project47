@@ -20,7 +20,7 @@ def crime_map_index(request):
 
         # retrieving the chart request from the chart-preview page
         if ('chart-type' in request.POST) and ('chart-crime-data' in request.POST):
-            # retrieving the chart's type and data as a str
+            # retrieving the chart's type and crime data as a str
             chart_type = request.POST.get('chart-type')
             chart_crime_data = request.POST.get('chart-crime-data')
 
@@ -57,7 +57,7 @@ def crime_map_index(request):
             crimecodes = Crime.objects.values_list("crimecode", flat=True).distinct().order_by("crimecode")
             
     else:
-        #del request.session['charts'] ##### testing purposes
+        # del request.session['charts'] ##### testing purposes
 
         crimelist = Crime.objects.all()
         print("Start", len(crimelist))
@@ -115,6 +115,7 @@ def visual_option(request):
 # sending Json request over to the chart_script.js
 def get_crime_data(request):
     queryType = request.GET.get("param1")
+    print("\n\n", queryType, "\n\n")
 
     # queryList is querySets of all Crime data filter by queryType
     crimeList = Crime.objects.all().values(queryType)
@@ -129,6 +130,7 @@ def get_crime_data(request):
         "dataLabels": list(dataDict.keys()),
         "dataCounts": list(dataDict.values()),
     }
+
     return JsonResponse(displayData)
 
 def get_neighborhood_data(request):
