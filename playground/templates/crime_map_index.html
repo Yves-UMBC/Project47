@@ -21,9 +21,17 @@
           <!-- A container for leaflet map -->
           <div class="" id="map"></div>
 
-          <!-- A container for all the visualization displlay-->
-          <div class="container text-center" id="charts-container">
-            
+          <!-- A container for all the charts display-->
+          <div class="container-fluid text-center" id="charts-container">
+            <div class="row">
+              <!-- Creating the container for the charts -->
+              {% for chart in charts %}
+                <div class="col-5 chart" id="chart-{{ forloop.counter }}">
+                  <canvas id="chart-canvas-{{ forloop.counter }}"></canvas>
+                  <button class="btn btn-primary">Delete</button>
+                </div>
+              {% endfor %}
+            </div>
           </div>
         </div>
       </div>
@@ -129,9 +137,16 @@
     </script>
   </div>
 
-  <!-- CDN links for charts rendering -->
+  <!-- CDN links for charts rendering and separate Chart file to handle charts display-->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{% static 'chart_display.js'%}"></script>
+  <script src="{% static 'crime_map_chart.js'%}"></script>
+  {% for chart in charts %}
+    {{ chart.chart_type }}
+    {{ chart.chart_crime_data }}
+    <script>
+      addChart("chart-canvas-{{ forloop.counter }}", "{{ chart.chart_type}}", "{{ chart.chart_crime_data }}");
+    </script>
+  {% endfor %}
 
   <!-- Leaflet Script for CDN source-->
   <!--<script type="module" src="{% static 'Leaflet-heat/dist/leaflet-heat.js' %}"></script>-->
