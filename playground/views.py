@@ -1,5 +1,5 @@
 # Contains functions and classes that handle what data is displayed in the HTML templates
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from .models import Crime, Neighborhood
@@ -7,12 +7,41 @@ from .models import Crime, Neighborhood
 
 # The home page of the crime map
 def crime_map_index(request):
+    # del request.session['charts']
     crimelist = 0
     if request.method == 'POST':
+        print(f"\n\nINSIDE OF request.POST", request.POST, "\n\n") ########### TEST
         neighborhoods = []
         weapons = []
         descriptions = []
         crimecodes = []
+
+        # retrieving the chart request from the chart-preview page
+        if ('chart-type' in request.POST) and ('chart-crime-data' in request.POST):
+            # storing the chart request values
+            chart_type = request.POST.get('chart-type')
+            chart_crime_data = request.POST.get('chart-crime-data')
+            # retrieving the existing charts from the session or create an empty list
+            charts = request.session.get('charts', [{}])
+
+            print("\n\nAFTER request.session.get", charts, "\n\n") ######### TEST
+
+            set_chart = charts[0] # {}
+            if 'chart-type' in set_chart and 'chart-crime-data' in set_chart:
+                set_chart['chart_type'] = set_chart['chart_type'].extend(chart_type)
+                set_chart['chart_crime_data'] = set_chart['chart_crime_data'].extend(chart_crime_data)
+            else:
+                set_chart['chart_type'] = chart_type
+                set_chart['chart_crime_data'] = chart_crime_data
+
+            charts[0] = set_chart
+
+            print("\n\nAFTER charts.append", charts, "\n\n") ######### TEST
+
+            request.session['charts'] = charts
+
+            print("\n\nAFTER request.session['charts']", request.session['charts'], "\n\n") ######### TEST
+
         if 'neighborhood' in request.POST:
             neighborhoods = request.POST.getlist('neighborhood')
         else:
@@ -49,6 +78,7 @@ def crime_map_index(request):
             "descriptionlist": descriptionlist,
             "crimecodelist": crimecodelist,
             "recentcrimes" : recentcrimes,
+            # "charts": charts, # hold a dictionary value for chart_type and chart_crime_data
         }
         return render(request, 'crime_map_index.html', context)
 
@@ -68,10 +98,15 @@ def crime_map_index(request):
         "descriptionlist": descriptionlist,
         "crimecodelist": crimecodelist,
         "recentcrimes" : recentcrimes,
+        # "charts": charts, # hold a dictionary value for chart_type and chart_crime_data
     }
     return render(request, 'crime_map_index.html', context)
 
-  
+# helper function for crime_map_index to help rendering the charts
+def chart_rendering():
+    pass
+
+
 # Rendering visualization page
 def visual_option(request):
     crimelist = Crime.objects.all()

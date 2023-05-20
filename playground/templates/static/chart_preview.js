@@ -16,7 +16,7 @@ const chart = new Chart(ctx, {
 });
 
 // Dynamically updating the chart type
-var type = document.getElementById('type');
+var type = document.getElementById('chart-type');
 type.addEventListener('change', function() {changeType(this.value);})
 
 function changeType(updateType) {    
@@ -24,7 +24,7 @@ function changeType(updateType) {
     chart.update();
 }
 
-var data1 = document.getElementById('dataOne');
+var data1 = document.getElementById('chart-crime-data');
 data1.addEventListener('change', function() {changeData(this.value);})
 
 function changeData(updateData) {

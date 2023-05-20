@@ -6,134 +6,134 @@
 <!-- Links for Chosen Jquery drop down menu-->
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
+
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Baltimore Crime Map{% endblock %}
 {% block nav-title %}<h1 class="text-light">Project47</h1>{% endblock %}
-{% block page_content %}
 
+{% block page_content %}
   <!-- Main content of the website -->
   <div class="container-fluid text-center" id="body-container">
     <div class="row">
-      <div class="col-12">
-        <div class="" id="visualization">
+      <div class="col-10">
+        <div class="" id="map-and-charts-container">
           <!-- A container for leaflet map -->
           <div class="" id="map"></div>
+
           <!-- A container for all the visualization displlay-->
-          <div class="container" id="visual-box">
-
-            <div class="row text-center">
-              <div class="col-md-4">
-                <div class="visual">Visual 1</div>
-              </div>
-              <div class="col-md-4">
-                <div class="visual">Visual 2</div>
-              </div>
-              <div class="col-md-4">
-                <div class="visual">Visual 3</div>
-              </div>
-              <div class="col-md-4">
-                <div class="visual">Visual 4</div>
-              </div>
-              <div class="col-md-4">
-                <div class="visual">Visual 5</div>
-              </div>
-              <div class="col-md-4">
-                <div class="visual">Visual 6</div>
-              </div>
-            </div>
-
+          <div class="container text-center" id="charts-container">
+            
           </div>
         </div>
       </div>
 
-      <div class="col">
-        <div class="btn-group-vertical" id="settings">
-          <button class="btn">Global Filter settings</button>
-      <body>
-        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
-        <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
-      <form method="post">
-        {% csrf_token %}
-        <div class="btn-group-vertical" id="settings">
-          <label for="neighborhood">Neighborhood:</label>
-          <select data-placeholder="Neighborhood" multiple class="chozen-select" name="neighborhood" style="width:180px">
-            {% for neighborhood in neighborhoodlist %}
-              <option value="{{neighborhood.name}}">{{neighborhood.name}}</option>
-            {% endfor %} 
-          </select> 
-          <button type="button" class="chosen-toggle select">Select all</button>
-          <button type="button" class="chosen-toggle deselect">Deselect all</button>  <br>
-        </div>
-        <div class="btn-group-vertical" id="settings">
-          <label for="weapon">Weapon:</label>
-          <select data-placeholder="Weapon" multiple class="chozen-select" name="weapon" style="width:180px">
-            {% for weapon in weaponlist %}
-              <option value="{{weapon.weapon}}">{{weapon.weapon}}</option>
-            {% endfor %} 
-          </select> 
-          <button type="button" class="chosen-toggle select">Select all</button>
-          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
-        </div>
-        <div class="btn-group-vertical" id="settings">
-          <label for="description">Description:</label>
-          <select data-placeholder="Description" multiple class="chozen-select" name="description"style="width:180px">
-            {% for description in descriptionlist %}
-              <option value="{{description.description}}">{{description.description}}</option>
-            {% endfor %} 
-          </select> 
-          <button type="button" class="chosen-toggle select">Select all</button>
-          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
-        </div>
-        <div class="btn-group-vertical" id="settings">
-          <label for="crimeCode">Crime Code:</label>
-          <select data-placeholder="Crime Code" multiple class="chozen-select" name="crimecode style="width:180px">
-            {% for crimecode in crimecodelist %}
-              <option value="{{crimecode.crimecode}}">{{crimecode.crimecode}}</option>
-            {% endfor %} 
-          </select> 
-          <button type="button" class="chosen-toggle select">Select all</button>
-          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
-        </div>
-        <div class="btn-group-vertical" id="settings">
-          <label for="hfai">HFAI:</label>
-          <select data-placeholder="hfai" multiple class="chozen-select" name="hfai" style="width:180px">
-            <option value="<6"> < 6.0</option>
-            <option value="6-8"> 6.0 - 8.0</option>
-            <option value="8-10"> 8.0 - 10.0</option>
-            <option value="10-12"> 10 - 12</option>
-            <option value=">12"> > 12.0</option>
-          </select> 
-          <button type="button" class="chosen-toggle select">Select all</button>
-          <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
-        </div>
-        <label for="start">Start Date:</label>
-        <input type="date" id="start">
-        <label for="end">End Date:</label>
-        <input type="date" id="end">
-        <button type="submit" name="'submit">Update</button>
-      </form> 
-        
-        <script type="text/javascript">
-          $(function() {
-              $(".chozen-select").chosen();
-          });
+      <div class="col-2" id="global-filter-setting">
+        <div class="btn-group-vertical text-center" id="settings">
+          <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#map-filters" aria-expanded="false" aria-controls="map-filters">
+            Global Filter Settings
+          </button>
+          <br>
+          <div class="collapse container-fluid text-center" id="map-filters">
+            <div class="card card-body">
+              <p>There's something here</p>
+            </div>
+          </div>
+      </div>
 
-
-            $('.chosen-toggle').each(function(index) {
-                $(this).on('click', function(){
-                     $(this).parent().find('option').prop('selected', $(this).hasClass('select')).parent().trigger('chosen:updated');
-                });
-            });
-                   </script>
-</body>  
-
-        </div>
     </div>
   </div>
 
-  <!-- Leaflet Script for java Scripts-->
+  <!-- Global Filter settings -->
+  <div>
+    <!-- Multiple selections -->
+    <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
+    <form method="post">
+      {% csrf_token %}
+      <!-- Neighborhood -->
+      <div class="btn-group-vertical" id="settings">
+        <label for="neighborhood">Neighborhood:</label>
+        <select data-placeholder="Neighborhood" multiple class="chozen-select" name="neighborhood" style="width:180px">
+          {% for neighborhood in neighborhoodlist %}
+            <option value="{{neighborhood.name}}">{{neighborhood.name}}</option>
+          {% endfor %} 
+        </select> 
+        <button type="button" class="chosen-toggle select">Select all</button>
+        <button type="button" class="chosen-toggle deselect">Deselect all</button>  <br>
+      </div>
+      <!-- Weapons -->
+      <div class="btn-group-vertical" id="settings">
+        <label for="weapon">Weapon:</label>
+        <select data-placeholder="Weapon" multiple class="chozen-select" name="weapon" style="width:180px">
+          {% for weapon in weaponlist %}
+            <option value="{{weapon.weapon}}">{{weapon.weapon}}</option>
+          {% endfor %} 
+        </select> 
+        <button type="button" class="chosen-toggle select">Select all</button>
+        <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+      </div>
+      <!-- Crime Description -->
+      <div class="btn-group-vertical" id="settings">
+        <label for="description">Description:</label>
+        <select data-placeholder="Description" multiple class="chozen-select" name="description"style="width:180px">
+          {% for description in descriptionlist %}
+            <option value="{{description.description}}">{{description.description}}</option>
+          {% endfor %} 
+        </select> 
+        <button type="button" class="chosen-toggle select">Select all</button>
+        <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+      </div>
+      <!-- Crime Code -->
+      <div class="btn-group-vertical" id="settings">
+        <label for="crimeCode">Crime Code:</label>
+        <select data-placeholder="Crime Code" multiple class="chozen-select" name="crimecode style="width:180px">
+          {% for crimecode in crimecodelist %}
+            <option value="{{crimecode.crimecode}}">{{crimecode.crimecode}}</option>
+          {% endfor %} 
+        </select> 
+        <button type="button" class="chosen-toggle select">Select all</button>
+        <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+      </div>
+      <!-- HFAI -->
+      <div class="btn-group-vertical" id="settings">
+        <label for="hfai">HFAI:</label>
+        <select data-placeholder="hfai" multiple class="chozen-select" name="hfai" style="width:180px">
+          <option value="<6"> < 6.0</option>
+          <option value="6-8"> 6.0 - 8.0</option>
+          <option value="8-10"> 8.0 - 10.0</option>
+          <option value="10-12"> 10 - 12</option>
+          <option value=">12"> > 12.0</option>
+        </select> 
+        <button type="button" class="chosen-toggle select">Select all</button>
+        <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
+      </div>
+      <!-- Date range -->
+      <label for="start">Start Date:</label>
+      <input type="date" id="start">
+      <label for="end">End Date:</label>
+      <input type="date" id="end">
+      <button type="submit" name="'submit">Update</button>
+    </form> 
+
+    <script type="text/javascript">
+      $(function() {
+          $(".chozen-select").chosen();
+      });
+      $('.chosen-toggle').each(function(index) {
+        $(this).on('click', function(){
+          $(this).parent().find('option').prop('selected', $(this).hasClass('select')).parent().trigger('chosen:updated');
+        });
+      });
+    </script>
+  </div>
+
+  <!-- CDN links for charts rendering -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{% static 'chart_display.js'%}"></script>
+
+  <!-- Leaflet Script for CDN source-->
   <!--<script type="module" src="{% static 'Leaflet-heat/dist/leaflet-heat.js' %}"></script>-->
   <script 
     src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" 
@@ -144,7 +144,7 @@
   <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>   
   <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
 
-
+  <!-- Map JavaScript File Reference and Some other function within the map -->
   <script src="{% static 'map.js' %}"></script>
   <script>
     var points = [];
@@ -152,7 +152,6 @@
   </script>
   {% for crime in crimelist %}
     <script>
-
       points.push(["{{crime.latitude}}", "{{crime.longitude}}"])
     </script>
   {% endfor %}
@@ -166,3 +165,5 @@
   <script>
     var map = createMap(points, pointsrecent);
   </script>
+
+{% endblock %}
