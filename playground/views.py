@@ -97,10 +97,18 @@ def crime_map_index(request):
     }
     return render(request, 'crime_map_index.html', context)
 
-# helper function for crime_map_index to help rendering the charts
-def chart_rendering():
-    pass
+# function used to delete chart
+def delete_chart(request):
+    print("inside delete chart")
+    id = request.GET.get("param1")
+    charts = request.session.get('charts', [])
+    
+    charts.pop(int(id))
 
+    request.session['charts'] = charts
+    request.session.modified = True
+    
+    return JsonResponse({'charts': charts})
 
 # Rendering visualization page
 def visual_option(request):

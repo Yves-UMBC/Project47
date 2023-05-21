@@ -24,4 +24,4 @@ function addChart(canvasId, chartType, chartCrimeData) {
             });
         })
         .catch(error => console.error(error));
-}
+};
