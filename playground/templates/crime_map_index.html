@@ -160,12 +160,12 @@
       var chartContainer = document.getElementById("chart-" + chartId);
       chartContainer.remove();
 
-      var charts = "{{ charts|safe }}";
-      console.log(charts);
-      console.log('Type of charts:', typeof charts);
-      // charts.splice(chartId - 1, 1);
-      console.log(charts);
-      console.log('Deleting chart with ID:', chartId);
+      fetch('/delete_chart?param1=' + (chartId - 1))
+        .then(response => response.json())
+        .then(charts => {
+
+        })
+        .catch(error => console.error(error));
     });
   });
 </script>

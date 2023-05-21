@@ -4,6 +4,17 @@ from django.http import HttpResponse, JsonResponse
 from django.db.models import Q
 from .models import Crime, Neighborhood
 
+def delete_chart(request):
+    print("inside delete chart")
+    id = request.GET.get("param1")
+    charts = request.session.get('charts', [])
+    
+    charts.pop(int(id))
+
+    request.session['charts'] = charts
+    request.session.modified = True
+    
+    return JsonResponse({'charts': charts})
 
 # The home page of the crime map
 def crime_map_index(request):
