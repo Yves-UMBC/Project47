@@ -28,7 +28,7 @@
               {% for chart in charts %}
                 <div class="col-5 chart" id="chart-{{ forloop.counter }}">
                   <canvas id="chart-canvas-{{ forloop.counter }}"></canvas>
-                  <button class="btn btn-primary">Delete</button>
+                  <button class="btn btn-primary" data-chart="{{ forloop.counter }}">Delete</button>
                 </div>
               {% endfor %}
             </div>
@@ -137,9 +137,9 @@
     </script>
   </div>
 
-  <!-- CDN links for charts rendering and separate Chart file to handle charts display-->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="{% static 'crime_map_chart.js'%}"></script>
+<!-- CDN links for charts rendering and separate Chart file to handle charts display--> 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'crime_map_chart.js'%}"></script>
   {% for chart in charts %}
     {{ chart.chart_type }}
     {{ chart.chart_crime_data }}
@@ -147,6 +147,28 @@
       addChart("chart-canvas-{{ forloop.counter }}", "{{ chart.chart_type}}", "{{ chart.chart_crime_data }}");
     </script>
   {% endfor %}
+
+
+<script>
+  // Get all the delete buttons
+  var deleteButtons = document.querySelectorAll('.btn-primary[data-chart]');
+  
+  // Add event listener to each delete button
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      var chartId = event.target.getAttribute('data-chart');
+      var chartContainer = document.getElementById("chart-" + chartId);
+      chartContainer.remove();
+
+      var charts = "{{ charts|safe }}";
+      console.log(charts);
+      console.log('Type of charts:', typeof charts);
+      // charts.splice(chartId - 1, 1);
+      console.log(charts);
+      console.log('Deleting chart with ID:', chartId);
+    });
+  });
+</script>
 
   <!-- Leaflet Script for CDN source-->
   <!--<script type="module" src="{% static 'Leaflet-heat/dist/leaflet-heat.js' %}"></script>-->
