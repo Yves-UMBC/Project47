@@ -115,7 +115,6 @@ def visual_option(request):
 # sending Json request over to the chart_script.js
 def get_crime_data(request):
     queryType = request.GET.get("param1")
-    print("\n\n", queryType, "\n\n")
 
     # queryList is querySets of all Crime data filter by queryType
     crimeList = Crime.objects.all().values(queryType)
