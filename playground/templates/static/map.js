@@ -17,9 +17,9 @@ function createMap(points, pointsrecent)
 
   // neighborhood outlines
   var myStyle = {
-      "color": '#330000',
+      "color": '#FF3333',
       weight: 2,
-      opacity: 0.2,
+      opacity: 0.5,
       fillOpacity: 0.2
     };
   var geojsonLayer = new L.GeoJSON.AJAX("static/neighborhood.geojson", 
