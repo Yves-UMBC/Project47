@@ -14,11 +14,20 @@ def crime_map_index(request):
     crimecodes = get_data(request, "crimecode")
     dates = get_date_data(request)
 
-    crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
+
+    
+    if 'weapon' in request.POST and 'None' not in weapons:
+        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
+                                     datetime__gte=dates[0], datetime__lte=dates[1], 
+                                     crimecode__in=crimecodes).filter(weapon__in=weapons)
+    else:
+        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
                                      datetime__gte=dates[0], datetime__lte=dates[1], 
                                      crimecode__in=crimecodes).filter(Q(weapon__in=weapons) | Q(weapon__isnull=True))
 
     print("Num of crimes", len(crimelist))
+    if len(crimelist) == 0:
+        messages.add_message(request, messages.WARNING, "No Results Found")
     neighborhoodlist = Neighborhood.objects.values("name").distinct().order_by("name")
     weaponlist = Crime.objects.values("weapon").distinct().order_by("weapon")
     descriptionlist = Crime.objects.values("description").distinct().order_by("description")
