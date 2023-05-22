@@ -166,7 +166,6 @@ def get_date_data(request):
             
         dates[0] = start
         dates[1] = end
-    print(dates)
     return dates
 
 # return the list of values for the attribute 'type' to pull crime data from
