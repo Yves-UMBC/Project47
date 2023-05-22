@@ -1,32 +1,32 @@
-/* add margin to the left of the first div */
-.mr-auto {
+/* Adding Styles to Nav Bar in base.html */
+.mr-auto { /* add margin to the left of the first div */
     margin-left: 20px;
 }
-/* add margin to the right of the last div */
-.ml-auto {
+
+.ml-auto { /* add margin to the right of the last div */
     margin-right: 20px;
 }
-/* Increase the button inside nav bar*/
-.my-nav .btn {
+
+.my-nav .btn { /* Increase the button inside nav bar*/
     font-size: 20px;
 }
 
+
+/* Adding Styles to crime_map_index.html */
 #body-container {
     padding-top: 20px;
 }
-#visual-box{
-    margin-top: 20px;
+
+#map { /* Leaflet map setting*/
+    height: 400px;
 }
 
-#visual-box .row .visual{
-    border: 1px solid grey;
+#charts-container {
+    padding-top: 20px;
 }
-
-/* Leaflet map setting*/
-#map {
-    height: 300px;
+.chart {
+    margin: 10px;
 }
-
 
 /* The Style is for the visual_option.html */
 .chart-options-preview {
@@ -36,21 +36,26 @@
     grid-template-rows: 0.6fr 1.4fr;
     gap: 0px 10px;
     grid-template-areas: 
-        "chart-options-select chart-preview chart-preview"
+        "forms-options-select chart-preview chart-preview"
         ". chart-preview chart-preview";
 }
+
+.chart-preview { grid-area: chart-preview; }
+.forms-options-select { grid-area: forms-options-select; }
 
 .chart-options-select {
     display: grid;
     grid-template-columns: 1fr; 
-    grid-template-rows: 1fr 1fr; 
-    gap: 0px 0px;
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 10px 0;
     grid-template-areas: 
         "chart-type"
-        "chart-data-one";
+        "chart-data-one"
+        "add-chart-button";
     grid-area: chart-options-select;
 }
 
+
 .chart-type { grid-area: chart-type; }
 .chart-data-one { grid-area: chart-data-one; }
-.chart-preview { grid-area: chart-preview; }
+.add-chart-button { grid-area: add-chart-button; }

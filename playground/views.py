@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.contrib import messages
 from .models import Crime, Neighborhood
 
+
 # The home page of the crime map
 def crime_map_index(request):
     crimelist = 0
@@ -14,6 +15,31 @@ def crime_map_index(request):
     crimecodes = get_data(request, "crimecode")
     dates = get_date_data(request)
 
+    # retrieving the existing charts from the session or create an empty list
+    charts = request.session.get('charts', [])
+
+    if request.method == 'POST':
+        print(f"\n\nINSIDE OF request.POST", request.POST, "\n\n") ########### TEST
+
+
+        # retrieving the chart request from the chart-preview page
+        if ('chart-type' in request.POST) and ('chart-crime-data' in request.POST):
+            # retrieving the chart's type and crime data as a str
+            chart_type = request.POST.get('chart-type')
+            chart_crime_data = request.POST.get('chart-crime-data')
+
+            print("\n\nAFTER request.session.get", charts, chart_type, chart_crime_data, "\n\n") ######### TEST
+
+            charts.append({'chart_type': chart_type, 'chart_crime_data': chart_crime_data})
+
+            print("\n\nAFTER charts.append", charts, "\n\n") ######### TEST
+            # update the session
+            request.session['charts'] = charts
+
+            print("\n\nAFTER request.session['charts']", request.session['charts'], "\n\n") ######### TEST
+
+
+
 
     
     if 'weapon' in request.POST and 'None' not in weapons:
@@ -21,6 +47,7 @@ def crime_map_index(request):
                                      datetime__gte=dates[0], datetime__lte=dates[1], 
                                      crimecode__in=crimecodes).filter(weapon__in=weapons)
     else:
+
         crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
                                      datetime__gte=dates[0], datetime__lte=dates[1], 
                                      crimecode__in=crimecodes).filter(Q(weapon__in=weapons) | Q(weapon__isnull=True))
@@ -28,6 +55,9 @@ def crime_map_index(request):
     print("Num of crimes", len(crimelist))
     if len(crimelist) == 0:
         messages.add_message(request, messages.WARNING, "No Results Found")
+
+
+   
     neighborhoodlist = Neighborhood.objects.values("name").distinct().order_by("name")
     weaponlist = Crime.objects.values("weapon").distinct().order_by("weapon")
     descriptionlist = Crime.objects.values("description").distinct().order_by("description")
@@ -40,10 +70,26 @@ def crime_map_index(request):
         "descriptionlist": descriptionlist,
         "crimecodelist": crimecodelist,
         "recentcrimes": recentcrimes,
+        "charts": charts, # hold a dictionary value for chart_type and chart_crime_data
     }
     return render(request, 'crime_map_index.html', context)
 
 
+
+# function used to delete chart
+def delete_chart(request):
+    print("inside delete chart")
+    id = request.GET.get("param1")
+    charts = request.session.get('charts', [])
+    
+    charts.pop(int(id))
+
+    request.session['charts'] = charts
+    request.session.modified = True
+    
+    return JsonResponse({'charts': charts})
+
+  
 # Rendering visualization page
 def visual_option(request):
     crimelist = Crime.objects.all()
@@ -54,9 +100,8 @@ def visual_option(request):
     }
     return render(request, 'visual_option.html', context)
 
+  
 # sending Json request over to the chart_script.js
-
-
 def get_crime_data(request):
     queryType = request.GET.get("param1")
 
@@ -73,6 +118,7 @@ def get_crime_data(request):
         "dataLabels": list(dataDict.keys()),
         "dataCounts": list(dataDict.values()),
     }
+
     return JsonResponse(displayData)
 
 
