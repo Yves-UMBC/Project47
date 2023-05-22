@@ -6,37 +6,35 @@
 {% block nav-title %}<h1 class="text-light">Preview Chart Options</h1>{% endblock %}
 
 {% block page_content %}
-    <!-- <h1 class="display-1">Visualization Page</h1> -->
-
-    <!-- <label for="type">Chart Type:</label>
-    <select name="type" id="type">
-        <option value="bar">Bar</option>
-        <option value="line">Line</option>
-        <option value="pie">Pie</option>
-        <option value="doughnut">Doughnut</option>
-    </select> -->
     <div class="chart-options-preview">
-        <div class="chart-options-select">
-            <div class="chart-type">
-                <select class="form-select" name="type" id="type">
-                    <option selected>Choose a Chart Type</option>
-                    <option value="bar">Bar</option>
-                    <option value="line">Line</option>
-                    <option value="pie">Pie</option>
-                    <option value="doughnut">Doughnut</option>
-                </select>
-            </div>
-            <div class="chart-data-one">
-                <select class="form-select" name="dataOne" id="dataOne">
-                    <option selected>Choose Crime Data</option>
-                    <option value="avgincome">Average Income</option>
-                    <option value="weapon">Weapon</option>
-                    <option value="neighborhood">neighborhood</option>
-                </select>
-            </div>
-            <div class="add-chart-button">
-                <a href="{% url 'crime_map_index' %}" class="btn btn-primary">Add Chart</a>
-            </div>
+        <!-- Sending a post request to the main crime map-->
+        <div class="forms-options-select">
+            <form method="POST" action="{% url 'crime_map_index' %}">
+                {% csrf_token %}
+                <div class="chart-options-select">
+                    <div class="chart-type">
+                        <select class="form-select" name="chart-type" id="chart-type">
+                            <option selected>Choose a Chart Type</option>
+                            <option value="bar">Bar</option>
+                            <option value="line">Line</option>
+                            <option value="pie">Pie</option>
+                            <option value="doughnut">Doughnut</option>
+                        </select>
+                    </div>
+                    <div class="chart-data-one">
+                        <select class="form-select" name="chart-crime-data" id="chart-crime-data">
+                            <option selected>Choose Crime Data</option>
+                            <option value="description">Crime Description</option>
+                            <option value="weapon">Weapon</option>
+                            <option value="neighborhood">neighborhood</option>
+                            <option value="crimecode">Crime Code</option>
+                        </select>
+                    </div>
+                    <div class="add-chart-button">
+                        <button type="submit" class="btn btn-primary">Add Chart</button>
+                    </div>
+                </div>
+            </form>
         </div>
         <div class="chart-preview">
             <canvas id="myChart"></canvas>
@@ -45,7 +43,7 @@
 
     <!-- Adding Script for the Chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{% static 'chart_script.js' %}"></script>
+    <script src="{% static 'chart_preview.js' %}"></script>
     
 {% endblock %}
 

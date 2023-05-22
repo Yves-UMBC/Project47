@@ -9,4 +9,5 @@ urlpatterns = [
     path('visual-option/', views.visual_option, name="visual_option"),
     path('get_crime_data/', views.get_crime_data, name="get_crime_data"),
     path('get_neighborhood_data/', views.get_neighborhood_data, name="get_neighborhood_data"),
+    path('delete_chart/', views.delete_chart, name="delete_chart"),
 ]
