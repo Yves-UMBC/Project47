@@ -17,13 +17,13 @@
             crossorigin="anonymous">
         </script>
         
-            <title>{% block title %}mysite{% endblock %}</title>
+        <title>{% block title %}mysite{% endblock %}</title>
     </head>
     <body>
         <!-- Creating a nav bar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-nav">
             <div class="mr-auto ml-3">
-                <a href="{% url 'visual_option'%}" class="btn btn-outline-light border-0">Add Visualization</a>
+                <a href="{% url 'visual_option'%}" class="btn btn-outline-light border-0">Add Chart</a>
             </div>
             <div class="mx-auto">
                 {% block nav-title %}{% endblock %}
