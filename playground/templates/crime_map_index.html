@@ -17,10 +17,12 @@
   
   <!--Error Messages-->
   {% for message in messages %}
-  <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    {{message}}
-  </div>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      {{message}}
+    </div>
   {% endfor %}
+
+  <!-- Container that holds the maps and the chart display -->
   <div class="container-fluid text-center" id="body-container">
     <div class="row">
       <div class="col-10">
@@ -39,8 +41,8 @@
                 </div>
               {% endfor %}
             </div>
-
           </div>
+
         </div>
       </div>
 
@@ -136,10 +138,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="{% static 'crime_map_chart.js'%}"></script>
   {% for chart in charts %}
-    {{ chart.chart_type }}
-    {{ chart.chart_crime_data }}
+    {{chart.chart_type}}
+    {{chart.chart_data}}
     <script>
-      addChart("chart-canvas-{{ forloop.counter }}", "{{ chart.chart_type}}", "{{ chart.chart_crime_data }}");
+      addChart("chart-canvas-{{ forloop.counter }}", "{{ chart.chart_type}}", "{{ chart.chart_data }}");
     </script>
   {% endfor %}
   <script>

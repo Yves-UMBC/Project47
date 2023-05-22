@@ -23,14 +23,14 @@ def crime_map_index(request):
 
 
         # retrieving the chart request from the chart-preview page
-        if ('chart-type' in request.POST) and ('chart-crime-data' in request.POST):
+        if ('chart-type' in request.POST) and ('chart-data' in request.POST):
             # retrieving the chart's type and crime data as a str
             chart_type = request.POST.get('chart-type')
-            chart_crime_data = request.POST.get('chart-crime-data')
+            chart_data = request.POST.get('chart-data')
 
-            print("\n\nAFTER request.session.get", charts, chart_type, chart_crime_data, "\n\n") ######### TEST
+            print("\n\nAFTER request.session.get", charts, chart_type, chart_data, "\n\n") ######### TEST
 
-            charts.append({'chart_type': chart_type, 'chart_crime_data': chart_crime_data})
+            charts.append({'chart_type': chart_type, 'chart_data': chart_data})
 
             print("\n\nAFTER charts.append", charts, "\n\n") ######### TEST
             # update the session
@@ -39,14 +39,9 @@ def crime_map_index(request):
             print("\n\nAFTER request.session['charts']", request.session['charts'], "\n\n") ######### TEST
 
     if 'weapon' in request.POST and 'None' not in weapons:
-        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
-                                     datetime__gte=dates[0], datetime__lte=dates[1], 
-                                     crimecode__in=crimecodes).filter(weapon__in=weapons)
+        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions, datetime__gte=dates[0], datetime__lte=dates[1], crimecode__in=crimecodes).filter(weapon__in=weapons)
     else:
-
-        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
-                                     datetime__gte=dates[0], datetime__lte=dates[1], 
-                                     crimecode__in=crimecodes).filter(Q(weapon__in=weapons) | Q(weapon__isnull=True))
+        crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions, datetime__gte=dates[0], datetime__lte=dates[1], crimecode__in=crimecodes).filter(Q(weapon__in=weapons) | Q(weapon__isnull=True))
 
     print("Num of crimes", len(crimelist))
     if len(crimelist) == 0:
@@ -82,7 +77,6 @@ def delete_chart(request):
     
     return JsonResponse({'charts': charts})
 
-  
 # Rendering visualization page
 def visual_option(request):
     crimelist = Crime.objects.all()
@@ -93,7 +87,6 @@ def visual_option(request):
     }
     return render(request, 'visual_option.html', context)
 
-  
 # sending Json request over to the chart_script.js
 def get_crime_data(request):
     queryType = request.GET.get("param1")
@@ -114,10 +107,39 @@ def get_crime_data(request):
 
     return JsonResponse(displayData)
 
-
+# This view function handle neighborhood data from the visual_option.html page
 def get_neighborhood_data(request):
-    # Already created a path for this views function
-    pass
+    # HFAI = 'hfai'
+    # print('\nINSIDE OF GET NEIGHBORHOOD DATA FUNCTION\n')
+    # # defining the data range for hfai and avgincome
+    # hfaiRange = ["(-inf, 6)", "[6,7)", "[7,8)", "[8,9)" "[10,inf)"]
+    # avgIncomeRange = []
+    # dataDict = {}
+
+    # # get the data from the database
+    # queryType = request.GET.get("param1")
+    # neighborhoodList = Neighborhood.objects.all().values(queryType)
+    # print(neighborhoodList)
+
+    # # condition for hfai
+    # if queryType == HFAI:
+    #     for hfaiDict in neighborhoodList:
+    #         hfaiValue = hfaiDict[HFAI]
+    #         if hfaiValue < 6:
+    #             dataDict["< 6"] = dataDict.get("< 6", 0) + 1
+    #         elif hfaiValue >= 6 and hfaiValue < 7:
+
+    
+    # # queryValues is a dictionary (Ex: {'weapon': "PERSONAL_WEAPON"})
+    # # for neighborHoodDict in neighborhoodList:
+    # #     dataType = neighborHoodDict[queryType]
+    # #     dataDict[dataType] = dataDict.get(dataType, 0) + 1
+
+    displayData = {
+        "dataLabels": [],
+        "dataCounts": [],
+    }
+    return JsonResponse(displayData) 
 
 # return the date range for the crimes to be displayed on the map
 # based on user input from the filter options

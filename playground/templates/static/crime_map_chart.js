@@ -1,22 +1,22 @@
-function addChart(canvasId, chartType, chartCrimeData) {
-    var chartLabel = [];
-    var chartData = [];
-    fetch('/get_crime_data?param1=' + chartCrimeData)
+function addChart(canvasId, chartType, chartData) {
+    var chartLabelList = [];
+    var chartDataList = [];
+    fetch('/get_crime_data?param1=' + chartData)
         .then(response => response.json())
         .then(displayData => {
-            chartLabel = displayData.dataLabels;
-            chartData = displayData.dataCounts;
+            chartLabelList = displayData.dataLabels;
+            chartDataList = displayData.dataCounts;
 
             var ctx = document.getElementById(canvasId);
             var chart = new Chart(ctx, {
                 type: chartType,
                 data: {
-                    labels: chartLabel,
+                    labels: chartLabelList,
                     datasets: [{
                         label: 'Inner legend Labels',
                         backgroundColor: ['pink', 'grey', 'purple', 'red'],
                         borderColor: ['orange', 'cyan', 'lightblue', 'bloodorange'],
-                        data: chartData,
+                        data: chartDataList,
                         borderWidth: 1
                     }]
                 },

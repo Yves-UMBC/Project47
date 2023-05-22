@@ -1,4 +1,4 @@
-/* Adding Styles to Nav Bar in base.html */
+/* Adding spacing to Nav Bar in base.html */
 .navbar #nav-title {
     margin-left: 10%;
 }
@@ -10,6 +10,7 @@
 .navbar .navbar-toggler {
     margin-right: 10%;
 }
+
 
 /* Adding Styles to crime_map_index.html */
 #body-container {
