@@ -38,10 +38,6 @@ def crime_map_index(request):
 
             print("\n\nAFTER request.session['charts']", request.session['charts'], "\n\n") ######### TEST
 
-
-
-
-    
     if 'weapon' in request.POST and 'None' not in weapons:
         crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions,
                                      datetime__gte=dates[0], datetime__lte=dates[1], 
@@ -56,8 +52,6 @@ def crime_map_index(request):
     if len(crimelist) == 0:
         messages.add_message(request, messages.WARNING, "No Results Found")
 
-
-   
     neighborhoodlist = Neighborhood.objects.values("name").distinct().order_by("name")
     weaponlist = Crime.objects.values("weapon").distinct().order_by("weapon")
     descriptionlist = Crime.objects.values("description").distinct().order_by("description")
@@ -73,7 +67,6 @@ def crime_map_index(request):
         "charts": charts, # hold a dictionary value for chart_type and chart_crime_data
     }
     return render(request, 'crime_map_index.html', context)
-
 
 
 # function used to delete chart
@@ -142,7 +135,6 @@ def get_date_data(request):
         end = request.POST.get('endDate')
         if start:
             startFlag = 1
-
         # check that user start date is valid (in the crime table)
         if start:
             start = start.replace("-", "/")
@@ -174,6 +166,7 @@ def get_date_data(request):
             
         dates[0] = start
         dates[1] = end
+    print(dates)
     return dates
 
 # return the list of values for the attribute 'type' to pull crime data from

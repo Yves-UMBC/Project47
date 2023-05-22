@@ -112,25 +112,12 @@
         <button type="button" class="chosen-toggle select">Select all</button>
         <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
       </div>
-      <!-- HFAI -->
-      <div class="btn-group-vertical" id="settings">
-        <label for="hfai">HFAI:</label>
-        <select data-placeholder="hfai" multiple class="chozen-select" name="hfai" style="width:180px">
-          <option value="<6"> < 6.0</option>
-          <option value="6-8"> 6.0 - 8.0</option>
-          <option value="8-10"> 8.0 - 10.0</option>
-          <option value="10-12"> 10 - 12</option>
-          <option value=">12"> > 12.0</option>
-        </select> 
-        <button type="button" class="chosen-toggle select">Select all</button>
-        <button type="button" class="chosen-toggle deselect">Deselect all</button> <br>
-      </div>
       <!-- Date range -->
       <label for="start">Start Date:</label>
-      <input type="date" id="start">
+      <input type="date" name="startDate">
       <label for="end">End Date:</label>
-      <input type="date" id="end">
-      <button type="submit" name="'submit">Update</button>
+      <input type="date" name="endDate">
+      <button type="submit" name="submit">Update</button>
     </form> 
 
     <script type="text/javascript">
