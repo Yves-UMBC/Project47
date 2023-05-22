@@ -8,6 +8,16 @@
 from django.db import models
 
 
+class Readme(models.Model):
+    id = models.IntegerField(primary_key=True)
+    message = models.TextField(db_column='Message', blank=True, null=True)  # Field name made lowercase.
+    bitcoin_address = models.TextField(db_column='Bitcoin_Address', blank=True, null=True)  # Field name made lowercase.
+
+    class Meta:
+        managed = False
+        db_table = 'README'
+
+
 class AuthGroup(models.Model):
     name = models.CharField(unique=True, max_length=150)
 
@@ -79,14 +89,14 @@ class AuthUserUserPermissions(models.Model):
 
 class Crime(models.Model):
     idcrime = models.AutoField(primary_key=True)
-    crimecode = models.CharField(max_length=4, blank=True, null=True)
-    description = models.CharField(max_length=50, blank=True, null=True)
+    description = models.CharField(max_length=70)
+    datetime = models.CharField(db_column='dateTime', max_length=45, blank=True, null=True)  # Field name made lowercase.
     weapon = models.CharField(max_length=45, blank=True, null=True)
-    datetime = models.CharField(db_column='dateTime', max_length=20, blank=True, null=True)  # Field name made lowercase.
-    location = models.CharField(max_length=50, blank=True, null=True)
+    location = models.CharField(max_length=45, blank=True, null=True)
     latitude = models.FloatField(blank=True, null=True)
     longitude = models.FloatField(blank=True, null=True)
     neighborhood = models.CharField(max_length=45, blank=True, null=True)
+    crimecode = models.CharField(max_length=6, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -139,15 +149,20 @@ class DjangoSession(models.Model):
 
 
 class Neighborhood(models.Model):
-    idneighborhood = models.IntegerField(primary_key=True)
-    name = models.CharField(unique=True, max_length=45)
-    district = models.CharField(max_length=45, blank=True, null=True)
-    avgincome = models.FloatField(db_column='avgIncome', blank=True, null=True)  # Field name made lowercase.
-    neighborhoodcol = models.CharField(max_length=45, blank=True, null=True)
-    hfai = models.IntegerField(blank=True, null=True)
+    idneighborhood = models.AutoField(primary_key=True)
+    hfai = models.FloatField(blank=True, null=True)
+    median_income = models.FloatField(blank=True, null=True)
+    name = models.CharField(max_length=45, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'neighborhood'
 
 
+class PlaygroundCharts(models.Model):
+    idchart = models.IntegerField(primary_key=True)
+    type = models.CharField(max_length=50)
+
+    class Meta:
+        managed = False
+        db_table = 'playground_charts'
