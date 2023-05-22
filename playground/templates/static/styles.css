@@ -55,6 +55,7 @@
     grid-area: chart-options-select;
 }
 
+
 .chart-type { grid-area: chart-type; }
 .chart-data-one { grid-area: chart-data-one; }
 .add-chart-button { grid-area: add-chart-button; }

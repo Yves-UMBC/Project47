@@ -6,6 +6,7 @@
 {% block nav-title %}<h1 class="text-light">Preview Chart Options</h1>{% endblock %}
 
 {% block page_content %}
+
     <div class="chart-options-preview">
         <!-- Sending a post request to the main crime map-->
         <div class="forms-options-select">
@@ -43,7 +44,7 @@
 
     <!-- Adding Script for the Chartjs -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="{% static 'chart_preview.js' %}"></script>
     
 {% endblock %}
-
