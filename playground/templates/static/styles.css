@@ -14,18 +14,19 @@
 
 /* Adding Styles to crime_map_index.html */
 #body-container {
-    padding-top: 20px;
+    padding: 20px;
 }
 
 #map { /* Leaflet map setting*/
     height: 400px;
 }
 
-#charts-container {
-    padding-top: 20px;
+#charts-container { 
+    padding: 20px;
 }
-.chart {
-    margin: 10px;
+
+.filter-settings {
+    padding: 20px;
 }
 
 /* The Style is for the visual_option.html */
