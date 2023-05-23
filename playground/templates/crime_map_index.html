@@ -44,7 +44,8 @@
             {% csrf_token %}
             <!-- Neighboorhood -->
             <div class="form-floating mb-3">
-              <select class="form-select" id="selectNeigh" aria-label="Floating label select example">
+              <select class="form-select" id="selectNeigh" aria-label="Floating label select example" name="neighborhood">
+                <option selected>None</option>
                 {% for neighborhood in neighborhoodlist %}
                   <option value="{{neighborhood.name}}">{{neighborhood.name}}</option>
                 {% endfor %}
@@ -53,7 +54,8 @@
             </div>
             <!-- Weapon -->
             <div class="form-floating mb-3">
-              <select class="form-select" id="selectWeapon" aria-label="Floating label select example">
+              <select class="form-select" id="selectWeapon" aria-label="Floating label select example" name="weapon">
+                <option selected>None</option>
                 {% for weapon in weaponlist %}
                   <option value="{{weapon.weapon}}">{{weapon.weapon}}</option>
                 {% endfor %} 
@@ -62,7 +64,8 @@
             </div>
             <!-- Crime Description -->
             <div class="form-floating mb-3">
-              <select class="form-select" id="selectDesc" aria-label="Floating label select example">
+              <select class="form-select" id="selectDesc" aria-label="Floating label select example" name="description">
+                <option selected>None</option>
                 {% for description in descriptionlist %}
                   <option value="{{description.description}}">{{description.description}}</option>
                 {% endfor %}  
@@ -71,7 +74,8 @@
             </div>
             <!-- Crime Code -->
             <div class="form-floating mb-3">
-              <select class="form-select" id="selectCode" aria-label="Floating label select example">
+              <select class="form-select" id="selectCode" aria-label="Floating label select example" name="crimecode">
+                <option selected>None</option>
                 {% for crimecode in crimecodelist %}
                   <option value="{{crimecode.crimecode}}">{{crimecode.crimecode}}</option>
                 {% endfor %}  
@@ -83,13 +87,13 @@
               <div class="row g-2">
                 <div class="col-md">
                   <div class="form-floating">
-                    <input type="data" class="form-control" id="startDate" placeholder="mm/dd/yyyy">
+                    <input type="data" class="form-control" id="startDate" placeholder="mm/dd/yyyy" name="startDate">
                     <label for="startDate">Start Date</label>
                   </div>
                 </div>
                 <div class="col-md">
                   <div class="form-floating">
-                    <input type="data" class="form-control" id="endDate" placeholder="mm/dd/yyyy">
+                    <input type="data" class="form-control" id="endDate" placeholder="mm/dd/yyyy" name="endDate">
                     <label for="endDate">End Date</label>
                   </div>
                 </div>
