@@ -1,31 +1,32 @@
-/* Adding Styles to Nav Bar in base.html */
-.mr-auto { /* add margin to the left of the first div */
-    margin-left: 20px;
+/* Adding spacing to Nav Bar in base.html */
+.navbar #nav-title {
+    margin-left: 10%;
 }
 
-.ml-auto { /* add margin to the right of the last div */
-    margin-right: 20px;
+.navbar .navbar-collapse {
+    margin-right: 10%;
 }
 
-.my-nav .btn { /* Increase the button inside nav bar*/
-    font-size: 20px;
+.navbar .navbar-toggler {
+    margin-right: 10%;
 }
 
 
 /* Adding Styles to crime_map_index.html */
 #body-container {
-    padding-top: 20px;
+    padding: 20px;
 }
 
 #map { /* Leaflet map setting*/
     height: 400px;
 }
 
-#charts-container {
-    padding-top: 20px;
+#charts-container { 
+    padding: 20px;
 }
-.chart {
-    margin: 10px;
+
+.filter-settings {
+    padding: 20px;
 }
 
 /* The Style is for the visual_option.html */

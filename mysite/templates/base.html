@@ -20,16 +20,23 @@
     </head>
     <body>
         <!-- Creating a nav bar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark my-nav">
-            <div class="mr-auto ml-3">
-                <a href="{% url 'visual_option'%}" class="btn btn-outline-light border-0">Add Chart</a>
-            </div>
-            <div class="mx-auto">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="mr-auto mb-2 mb-lg-0" id="nav-title">
                 {% block nav-title %}{% endblock %}
             </div>
-            <div class="ml-auto mr-3">
-                <a href="{% url 'crime_map_index'%}" class="btn btn-outline-light border-0">Home</a>
-                <button class="btn btn-outline-light border-0">Restore</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapsable content for navbar -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item active" id="nav-home">
+                        <a href="{% url 'crime_map_index'%}" class="btn btn-outline-light border-0">Home</a>
+                    </li>
+                    <li class="nav-item" id="add-chart">
+                        <a href="{% url 'visual_option'%}" class="btn btn-outline-light border-0">Add Chart</a>
+                    </li>
+                </ul>
             </div>
         </nav>
 
