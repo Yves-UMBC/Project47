@@ -30,7 +30,7 @@ def crime_map_index(request):
             # update the session
             request.session['charts'] = charts
 
-    if 'weapon' in request.POST and 'None' not in weapons:
+    if 'weapon' in request.POST and None not in weapons:
         crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions, datetime__gte=dates[0], datetime__lte=dates[1], crimecode__in=crimecodes).filter(weapon__in=weapons)
     else:
         crimelist = Crime.objects.filter(neighborhood__in=neighborhoods, description__in=descriptions, datetime__gte=dates[0], datetime__lte=dates[1], crimecode__in=crimecodes).filter(Q(weapon__in=weapons) | Q(weapon__isnull=True))

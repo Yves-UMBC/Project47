@@ -55,7 +55,6 @@
             <!-- Weapon -->
             <div class="form-floating mb-3">
               <select class="form-select" id="selectWeapon" aria-label="Floating label select example" name="weapon">
-                <option selected>None</option>
                 {% for weapon in weaponlist %}
                   <option value="{{weapon.weapon}}">{{weapon.weapon}}</option>
                 {% endfor %} 
